@@ -16,11 +16,14 @@
         <activity
             android:name="com.wanmei.laohuemulator.MainActivity"
             android:label="@string/app_name" 
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.wanmei.laohuemulator.AboatActivity"></activity>
+        <activity android:name="com.wanmei.laohuemulator.FeedBackActivity"></activity>
+        <activity android:name="com.wanmei.laohuemulator.searchActivity"></activity>
     </application>
 </manifest>

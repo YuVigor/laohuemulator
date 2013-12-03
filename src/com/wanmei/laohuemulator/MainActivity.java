@@ -3,8 +3,8 @@ package com.wanmei.laohuemulator;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.ActionBar;
-import android.content.res.Configuration;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +15,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -26,12 +31,12 @@ import com.wanmei.laohuemulator.net.NetData;
 public class MainActivity extends FragmentActivity implements OnClickListener,
 		OnPageChangeListener {
 
-	private ActionBar mab;
+	// private ActionBar mab;
 	private View actionbarLayout = null;
 
 	private Button appbutton[] = new Button[7];
 
-	private Button findgame, Bplatform, Btype, Blanguage;
+	private Button findgame, Bplatform, Btype, Blanguage , emulatorsetbutton;
 
 	private ListView mlistview;
 
@@ -41,21 +46,142 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 
 	private ArrayList<View> listViews; // Tab页面列表
 
+	// menu list
+
+	private ListView emulatorlist, helperlist;
+
 	private int buttonid = 2;
 
 	private NetData mnetdata;
+
+	/**
+	 * 主内容的布局。
+	 */
+	private View content;
+
+	/**
+	 * menu的布局。
+	 */
+	private View menu;
+
+	/**
+	 * 屏幕宽度值。
+	 */
+	private int screenWidth;
+
+	/**
+	 * menu最多可以滑动到的左边缘。值由menu布局的宽度来定，marginLeft到达此值之后，不能再减少。
+	 */
+	private int leftEdge;
+
+	/**
+	 * menu完全显示时，留给content的宽度值。
+	 */
+	private int menuPadding = 230;
+
+	/**
+	 * menu布局的参数，通过此参数来更改leftMargin的值。
+	 */
+	private LinearLayout.LayoutParams menuParams;
+
+	/**
+	 * menu当前是显示还是隐藏。只有完全显示或隐藏menu时才会更改此值，滑动过程中此值无效。
+	 */
+	private boolean isMenuVisible = false;
 	
+	private boolean isEsetVisible = false;	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
+		initValues();
 		initView();
 		InitViewPager();
+
 		mFragmentManager = getSupportFragmentManager();
 	}
 
+	private void initValues() {
+		WindowManager window = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+		screenWidth = window.getDefaultDisplay().getWidth();
+		content = findViewById(R.id.content);
+		menu = findViewById(R.id.menu);
+		menuParams = (LinearLayout.LayoutParams) menu.getLayoutParams();
+		// 将menu的宽度设置为屏幕宽度减去menuPadding
+		menuParams.width = screenWidth - menuPadding;
+		// 左边缘的值赋值为menu宽度的负数
+		leftEdge = -menuParams.width;
+		// menu的leftMargin设置为左边缘的值，这样初始化时menu就变为不可见
+		menuParams.leftMargin = leftEdge;
+		// 将content的宽度设置为屏幕宽度
+		content.getLayoutParams().width = screenWidth;
+		emulatorsetbutton = (Button)menu.findViewById(R.id.emulator_set);
+		emulatorsetbutton.setOnClickListener(this);
+
+		helperlist = (ListView) menu.findViewById(R.id.menu_helper);
+		helperlist.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				switch(arg2){
+				
+				case 0:
+					
+					break;
+
+				case 1:
+					
+					intent.setClass(getApplicationContext(), FeedBackActivity.class);
+					startActivity(intent);
+					break;
+
+				case 2:
+					break;
+
+				case 3:
+					Log.e("suiyi", "arg2:"+arg2);
+					intent = new Intent();
+					intent.setClass(getApplicationContext(), AboatActivity.class);
+					startActivity(intent);
+					break;
+				}
+                
+			}
+		});
+		initMenuList();
+	}
+
+	private void initMenuList() {
+		String[] item_helper = { "设置游戏存储路径", "用户反馈",
+				"检测更新版本（v1.0）" , "关于" };
+		String[] item_helper_item = { "(..........)" ,"" ,"" ,""};
+		ArrayList<HashMap<String, Object>> listItems1 = new ArrayList<HashMap<String, Object>>();
+		
+		int len = item_helper.length;
+		for (int i = 0; i < len; i++) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("item_helper", item_helper[i]);
+			map.put("item_helper_item", item_helper_item[i]);
+			listItems1.add(map);
+		}
+		SimpleAdapter	adapterSimple = new SimpleAdapter(
+				getApplicationContext(), listItems1, R.layout.menu_list_item,
+				new String[] { "item_helper" , "item_helper_item"}, new int[] { R.id.menu_item ,R.id.menu_item_item});
+		helperlist.setAdapter(adapterSimple);
+	}
+	
+
 	private void initView() {
 
+		appbutton[0] = (Button) this.findViewById(R.id.menubutton);
+		appbutton[0].setOnClickListener(this);
+		appbutton[1] = (Button) this.findViewById(R.id.search);
+		appbutton[1].setOnClickListener(this);
 		appbutton[2] = (Button) this.findViewById(R.id.mygame);
 		appbutton[2].setOnClickListener(this);
 		appbutton[2].setSelected(true);
@@ -80,6 +206,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		LayoutInflater mInflater = getLayoutInflater();
 		listViews.add(mInflater.inflate(R.layout.my_game_page, null));
 		listViews.add(mInflater.inflate(R.layout.all_game_page, null));
+		listViews.add(mInflater.inflate(R.layout.arcade_game_page, null));
+		listViews.add(mInflater.inflate(R.layout.bully_game_page, null));
+		listViews.add(mInflater.inflate(R.layout.gba_game_page, null));
 		mviewpage.setAdapter(new PageAdapter(listViews));
 		mviewpage.setCurrentItem(0);
 		mviewpage.setOnPageChangeListener(this);
@@ -112,49 +241,19 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 
 	}
 
-	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-		mab = getActionBar();
-		mab.setTitle(R.string.title);
-		mab.setDisplayShowCustomEnabled(true);
-		mab.setDisplayShowHomeEnabled(false);
-		actionbarLayout = LayoutInflater.from(this).inflate(
-				R.layout.actionbar_view_vortical, null);
-		appbutton[0] = (Button) actionbarLayout.findViewById(R.id.menu);
-		appbutton[0].setOnClickListener(this);
-		appbutton[1] = (Button) actionbarLayout.findViewById(R.id.search);
-		appbutton[1].setOnClickListener(this);
-		mab.setCustomView(actionbarLayout);
-	}
-
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		// TODO Auto-generated method stub
-		super.onConfigurationChanged(newConfig);
-
-		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			Log.e("suiyi", "ORIENTATION_PORTRAIT");
-			actionbarLayout = LayoutInflater.from(this).inflate(
-					R.layout.actionbar_view_horizontal, null);
-			appbutton[0] = (Button) actionbarLayout.findViewById(R.id.menu);
-			appbutton[0].setOnClickListener(this);
-			appbutton[1] = (Button) actionbarLayout.findViewById(R.id.search);
-			appbutton[1].setOnClickListener(this);
-			mab.setCustomView(actionbarLayout);
-		} else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-			Log.e("suiyi", "ORIENTATION_LANDSCAPE");
-			actionbarLayout = LayoutInflater.from(this).inflate(
-					R.layout.actionbar_view_vortical, null);
-			appbutton[0] = (Button) actionbarLayout.findViewById(R.id.menu);
-			appbutton[0].setOnClickListener(this);
-			appbutton[1] = (Button) actionbarLayout.findViewById(R.id.search);
-			appbutton[1].setOnClickListener(this);
-			mab.setCustomView(actionbarLayout);
-		}
-
-	}
+	// @Override
+	// protected void onStart() {
+	// // TODO Auto-generated method stub
+	// super.onStart();
+	// mab = getActionBar();
+	// mab.setTitle(R.string.title);
+	// mab.setDisplayShowCustomEnabled(true);
+	// mab.setDisplayShowHomeEnabled(false);
+	// actionbarLayout = LayoutInflater.from(this).inflate(
+	// R.layout.actionbar_view_vortical, null);
+	//
+	// mab.setCustomView(actionbarLayout);
+	// }
 
 	@Override
 	public void onClick(View arg0) {
@@ -162,13 +261,33 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		int id = arg0.getId();
 		switch (id) {
 
-		case R.id.menu:
-			Toast.makeText(getApplicationContext(), "我是兔子", Toast.LENGTH_SHORT)
-					.show();
+		case R.id.menubutton:
+
+			if (isMenuVisible) {
+				Toast.makeText(getApplicationContext(), "我是兔子",
+						Toast.LENGTH_SHORT).show();
+				isMenuVisible = false;
+				menuParams.width = screenWidth - menuPadding;
+				// 左边缘的值赋值为menu宽度的负数
+				leftEdge = -menuParams.width;
+				// menu的leftMargin设置为左边缘的值，这样初始化时menu就变为不可见
+				menuParams.leftMargin = leftEdge;
+				// 将content的宽度设置为屏幕宽度
+				content.getLayoutParams().width = screenWidth;
+				menu.setLayoutParams(menuParams);
+			} else {
+				isMenuVisible = true;
+				menuParams.leftMargin = 1;
+				menu.setLayoutParams(menuParams);
+			}
+
 			break;
 		case R.id.search:
 			Toast.makeText(getApplicationContext(), "我也是兔子", Toast.LENGTH_SHORT)
 					.show();
+			Intent intent = new Intent();
+			intent.setClass(getApplicationContext(), searchActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.mygame:
 			Log.e("suiyi", "click mygame button");
@@ -206,6 +325,42 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 			setButtonclick(buttonid);
 			mviewpage.setCurrentItem(buttonid - 2);
 			break;
+		case R.id.emulator_set:
+			Log.e("suiyi", "emulatorset click");
+			emulatorlist = (ListView) menu.findViewById(R.id.menu_emulator);
+			emulatorlist.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+						long arg3) {
+					// TODO Auto-generated method stub
+
+				}
+			});
+			String[] item = { "PSP", "GBA", "NES" };
+			String[] item1 = { "(未安装，点击安装)", "(未安装，点击安装)", "(未安装，点击安装)" };			
+			ArrayList<HashMap<String, Object>> listItems = new ArrayList<HashMap<String, Object>>();
+			int len = item.length;
+			for (int i = 0; i < len; i++) {
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("item", item[i]);
+				map.put("item1", item1[i]);
+				listItems.add(map);
+			}
+			// 设定一个适配器
+			SimpleAdapter adapterSimple = new SimpleAdapter(
+					getApplicationContext(), listItems, R.layout.menu_list_item,
+					new String[] { "item" ,"item1"}, new int[] { R.id.menu_item ,R.id.menu_item_item });
+			emulatorlist.setAdapter(adapterSimple);
+			if(isEsetVisible){
+				emulatorlist.setVisibility(View.GONE);
+				isEsetVisible = false;
+			}else{
+
+				isEsetVisible = true;
+				emulatorlist.setVisibility(View.VISIBLE);
+			}
+			    break;
 		}
 
 	}
@@ -232,7 +387,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		Blanguage = (Button) view.findViewById(R.id.language);
 		Blanguage.setOnClickListener(this);
 		mlistview = (ListView) view.findViewById(R.id.game_show_list);
-        mnetdata = new NetData(getApplicationContext());
+		mnetdata = new NetData(getApplicationContext());
 		// 对listView进行适配
 		mlistview.setAdapter(mnetdata.getAdapter());
 
@@ -250,7 +405,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 			setButtonclick(arg0 + 2);
 			initAllGameView();
 			break;
-
+		case 2:
+			setButtonclick(arg0 + 2);
+			break;
+		case 3:
+			setButtonclick(arg0 + 2);
+			break;
+		case 4:
+			setButtonclick(arg0 + 2);
+			break;
 		}
 
 	}

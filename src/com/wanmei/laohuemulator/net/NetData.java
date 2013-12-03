@@ -19,8 +19,6 @@ public class NetData {
 
 	private String[] item = { "我叫mt", "老虎游戏 ", "笑傲江湖", "剑侠奇缘" };
 
-	ArrayList<HashMap<String, Object>> listItems = new ArrayList<HashMap<String, Object>>();
-
 	public SimpleAdapter getAdapter() {
 
 		// 创建一个ArrayList列表,内部存的是HashMap列表

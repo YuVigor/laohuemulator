@@ -9,7 +9,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:layout_marginLeft="20dp"
-            android:id="@+id/menu"
+            android:id="@+id/menubutton"
             android:text="@string/menu_title" />
         <TextView
             android:layout_width="wrap_content"

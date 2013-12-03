@@ -15,7 +15,17 @@
     <string name="down_load">下载</string>
     <string name="no_app">您还没有安装任意游戏，去看看我们为您精心挑选的游戏吧</string>
     <string name="look_all_game">看看有哪些游戏</string>
-     <string name="platform">平台</string>
-     <string name="type">类型</string>
-     <string name="language">语言</string>
+    <string name="platform">平台</string>
+    <string name="type">类型</string>
+    <string name="language">语言</string>
+    <string name="back">返回</string>
+    <string name="emulator_title">模拟器游戏大全</string>
+    <string name="version_inf">V1.0</string>
+    <string name="hint_feedback">联系方式（QQ号或者邮箱）</string>
+    <string name="hint_feedback_message">您的反馈是什么...</string>
+    <string name="submit">提交</string>
+    <string name="empty_message">请填写完整信息</string>
+    <string name="go_button">GO</string>
+    <string name="search_show_text">请输入游戏名称、类型或者所属平台</string>
+    
 </resources>
