@@ -4,61 +4,86 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <TabHost
-        android:id="@+id/tabhost"
+    <LinearLayout
+        android:id="@+id/bottom_layout"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="65dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/maintab_bottom_bg"
+        android:focusable="false"
+        android:gravity="top"
+        android:orientation="horizontal" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
+        <Button
+            android:id="@+id/mygame"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:orientation="horizontal" >
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableBottom="@drawable/maintab_bottom_line_selector"
+            android:drawableTop="@drawable/maintab_game_selector"
+            android:text="@string/my_game"
+            android:textColor="#666"
+            android:textSize="12sp" />
 
-            <!-- TabWidget的id属性必须为 @android:id/tabs -->
+        <Button
+            android:id="@+id/allgame"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableBottom="@drawable/maintab_bottom_line_selector"
+            android:drawableTop="@drawable/maintab_game_selector"
+            android:text="@string/all_game"
+            android:textColor="#666"
+            android:textSize="12sp" />
 
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" />
-            <!-- FrameLayout的id属性必须为 @android:id/tabcontent -->
+        <Button
+            android:id="@+id/game1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableBottom="@drawable/maintab_bottom_line_selector"
+            android:drawableTop="@drawable/maintab_game_selector"
+            android:text="@string/jie_ji"
+            android:textColor="#666"
+            android:textSize="12sp" />
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+        <Button
+            android:id="@+id/game2"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableBottom="@drawable/maintab_bottom_line_selector"
+            android:drawableTop="@drawable/maintab_game_selector"
+            android:text="@string/big_baster"
+            android:textColor="#666"
+            android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/view1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" />
+        <Button
+            android:id="@+id/game3"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableBottom="@drawable/maintab_bottom_line_selector"
+            android:drawableTop="@drawable/maintab_game_selector"
+            android:text="@string/handle_gba"
+            android:textColor="#666"
+            android:textSize="12sp" />
+    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/view2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" />
-
-                <TextView
-                    android:id="@+id/view3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" />
-
-                <TextView
-                    android:id="@+id/view4"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" />
-
-                <TextView
-                    android:id="@+id/view5"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" />
-
-                <TextView
-                    android:id="@+id/view6"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" />
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bottom_layout"
+        android:layout_gravity="center"
+        android:layout_weight="1.0"
+        android:background="#FFD700"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation" />
 
 </RelativeLayout>

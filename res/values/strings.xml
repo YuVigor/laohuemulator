@@ -6,4 +6,16 @@
     <string name="menu_title">菜单</string>
     <string name="search_title">搜索</string>
     <string name="title">老虎模拟器</string>
+    <string name="my_game">我的游戏</string>
+    <string name="all_game">全部游戏</string>
+    <string name="jie_ji">街机厅</string>
+    <string name="big_baster">小霸王</string>
+    <string name="handle_gba">掌机GBA</string>
+    <string name="game_name">"gamename"</string>
+    <string name="down_load">下载</string>
+    <string name="no_app">您还没有安装任意游戏，去看看我们为您精心挑选的游戏吧</string>
+    <string name="look_all_game">看看有哪些游戏</string>
+     <string name="platform">平台</string>
+     <string name="type">类型</string>
+     <string name="language">语言</string>
 </resources>

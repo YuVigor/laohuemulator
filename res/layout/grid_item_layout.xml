@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dip" >
+
+    <ImageView
+        android:id="@+id/item_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dip"
+        android:src="@drawable/ic_launcher" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/item_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/item_imageView"
+        android:layout_marginLeft="20dip"
+        android:text="@string/game_name"
+        android:textSize="35dp">
+    </TextView>
+    <Button 
+        android:id="@+id/download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/down_load"
+        android:layout_marginRight="30dip"
+        android:layout_alignParentRight="true"/>
+    
+
+</RelativeLayout>
