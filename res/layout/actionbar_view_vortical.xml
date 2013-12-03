@@ -17,6 +17,7 @@
             android:id="@+id/title"
             android:textSize="25sp"
             android:layout_marginLeft="90dp"
+            android:textColor="#FFD700"
             android:layout_gravity="center_horizontal"
             android:text="@string/title" />
          <Button
