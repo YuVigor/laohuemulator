@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/back_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:background="@drawable/action_bar"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/feed_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/button_bg"
+            android:text="@string/back" />
+
+        <EditText
+            android:id="@+id/search_message"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/feed_back_backgroad"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="@string/search_show_text"
+            android:minHeight="125dp"
+            android:padding="10dp"
+            android:textColor="#333"
+            android:textColorHint="#999"
+            android:textSize="12sp" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go_button" />
+    </LinearLayout>
+    <AbsoluteLayout 
+        android:id="@+id/showname"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/back_layout"
+        >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="108dp"
+            android:layout_y="276dp"
+            android:text="倚天屠龙"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="20dip" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="258dp"
+            android:layout_y="352dp"
+            android:text="火影忍者"
+            android:textSize="20dip" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="154dp"
+            android:layout_y="225dp"
+            android:text="武林外传"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="20dip" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="232dp"
+            android:layout_y="96dp"
+            android:text="射雕侠侣"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="20dip" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="104dp"
+            android:layout_y="142dp"
+            android:text="忍者龙剑坛"
+            android:textColor="@android:color/holo_blue_bright"
+            android:textSize="20dip" />
+        
+    </AbsoluteLayout>
+        "
+
+</RelativeLayout>

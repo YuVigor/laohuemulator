@@ -1,89 +1,126 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
     tools:context=".MainActivity" >
 
     <LinearLayout
-        android:id="@+id/bottom_layout"
+        android:id="@+id/menu"
         android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/maintab_bottom_bg"
-        android:focusable="false"
-        android:gravity="top"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/mygame"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/maintab_bottom_line_selector"
-            android:drawableTop="@drawable/maintab_game_selector"
-            android:text="@string/my_game"
-            android:textColor="#666"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/allgame"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/maintab_bottom_line_selector"
-            android:drawableTop="@drawable/maintab_game_selector"
-            android:text="@string/all_game"
-            android:textColor="#666"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/game1"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/maintab_bottom_line_selector"
-            android:drawableTop="@drawable/maintab_game_selector"
-            android:text="@string/jie_ji"
-            android:textColor="#666"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/game2"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/maintab_bottom_line_selector"
-            android:drawableTop="@drawable/maintab_game_selector"
-            android:text="@string/big_baster"
-            android:textColor="#666"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/game3"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/maintab_bottom_line_selector"
-            android:drawableTop="@drawable/maintab_game_selector"
-            android:text="@string/handle_gba"
-            android:textColor="#666"
-            android:textSize="12sp" />
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        <Button 
+            android:id="@+id/emulator_set"
+            android:layout_width="fill_parent"
+            android:layout_height="65dip"
+            android:background="@drawable/bg_screenshot"
+            android:clickable="true"
+            android:text="模拟器设置"
+            android:textSize="35dip"
+            />
+        <ListView 
+            android:id="@+id/menu_emulator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:visibility="gone"
+            ></ListView>
+        <ListView 
+            android:id="@+id/menu_helper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ></ListView> 
+        
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vPager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bottom_layout"
-        android:layout_gravity="center"
-        android:layout_weight="1.0"
-        android:background="#FFD700"
-        android:flipInterval="30"
-        android:persistentDrawingCache="animation" />
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
 
-</RelativeLayout>
+        <include layout="@layout/actionbar_view_vortical" />
+
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/maintab_bottom_bg"
+            android:focusable="false"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/mygame"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableBottom="@drawable/maintab_bottom_line_selector"
+                android:drawableTop="@drawable/maintab_game_selector"
+                android:text="@string/my_game"
+                android:textColor="#666"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/allgame"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableBottom="@drawable/maintab_bottom_line_selector"
+                android:drawableTop="@drawable/maintab_game_selector"
+                android:text="@string/all_game"
+                android:textColor="#666"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/game1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableBottom="@drawable/maintab_bottom_line_selector"
+                android:drawableTop="@drawable/maintab_game_selector"
+                android:text="@string/jie_ji"
+                android:textColor="#666"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/game2"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableBottom="@drawable/maintab_bottom_line_selector"
+                android:drawableTop="@drawable/maintab_game_selector"
+                android:text="@string/big_baster"
+                android:textColor="#666"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/game3"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableBottom="@drawable/maintab_bottom_line_selector"
+                android:drawableTop="@drawable/maintab_game_selector"
+                android:text="@string/handle_gba"
+                android:textColor="#666"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vPager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bottom_layout"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:background="#FFD700"
+            android:flipInterval="30"
+            android:persistentDrawingCache="animation" />
+    </LinearLayout>
+
+</LinearLayout>
